@@ -38,7 +38,7 @@ array_push($restaurantChains, RandomGenerator::RestaurantChain());
 
     <?php foreach ($restaurantChains as $restaurantChain) : ?>
         <div class="restaurant_chain-card">
-            <?php var_dump($restaurantChain); ?>
+            <?php echo $restaurantChain->toHTML(); ?>
         </div>
     <?php endforeach; ?>
 

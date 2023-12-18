@@ -43,18 +43,24 @@ class RestaurantLocation implements FileConvertible
 
     public function toHTML(): string
     {
-        return sprintf(
+        $html = sprintf(
             "
             <div class='restaurant-location-card'>
                 <h2>Restaurant Name: %s</h2>
                 <p>Restaurant Location: %s %s %s %s</p>
-            </div>",
+                <p>Employees:</p>
+            ",
             $this->name,
             $this->address,
             $this->city,
             $this->state,
             $this->zipCode
         );
+        foreach ($this->employees as $employee) {
+            $html .= sprintf("<p> %s %s</p>" . PHP_EOL, $employee->firstName, $employee->lastName);
+        }
+        $html .= "</div>";
+        return $html;
     }
 
     public function toMarkdown(): string

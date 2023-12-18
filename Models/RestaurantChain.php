@@ -47,15 +47,27 @@ class RestaurantChain extends Company implements FileConvertible
 
     public function toHTML(): string
     {
-        return sprintf(
+        // return sprintf(
+        //     "
+        //     <div class='restaurant-chain-card'>
+        //         <h2>Restaurant Chain: %s</h2>
+        //         <p>Cuisine Type: %s</p>
+        //     </div>",
+        //     $this->name,
+        //     $this->cuisineType
+        // );
+        $html = sprintf(
             "
             <div class='restaurant-chain-card'>
                 <h2>Restaurant Chain: %s</h2>
-                <p>Cuisine Type: %s</p>
-            </div>",
-            $this->name,
-            $this->cuisineType
+                ",
+            $this->name
         );
+        foreach ($this->restaurantLocations as $restaurantLocation) {
+            $html .= $restaurantLocation->toHTML();
+        }
+        $html .= "</div>";
+        return $html;
     }
 
     public function toMarkdown(): string

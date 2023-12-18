@@ -37,14 +37,12 @@ class RandomGenerator
     public static function RestaurantChain(): RestaurantChain
     {
         $faker = Factory::create();
-        // $totalEmployees = rand(3, 10);
-        // $numberOfLocations = rand(1, 3);
-        $totalEmployees = 1;
-        $numberOfLocations = 1;
+        $totalEmployees = rand(3, 10);
+        $numberOfLocations = rand(1, 3);
         $companyName = $faker->company();
         $restaurantLocations = [];
         for ($i = 0; $i < $numberOfLocations; $i++) {
-            $restaurantLocation = self::RestaurantLocation($companyName, $totalEmployees);
+            $restaurantLocation = self::RestaurantLocation();
             array_push($restaurantLocations, $restaurantLocation);
         }
         $restaurantChain = new RestaurantChain(
@@ -68,16 +66,17 @@ class RandomGenerator
         return $restaurantChain;
     }
 
-    private static function RestaurantLocation(string $company, int $totalEmployees): RestaurantLocation
+    private static function RestaurantLocation(): RestaurantLocation
     {
         $faker = Factory::create();
         $employees = [];
+        $totalEmployees = rand(1, 5);
         for ($i = 0; $i < $totalEmployees; $i++) {
             $employee = self::Employee();
             array_push($employees, $employee);
         }
         return new RestaurantLocation(
-            $company,
+            $faker->company(),
             $faker->address(),
             $faker->city(),
             "sample-state",
